@@ -1,10 +1,5 @@
-import { revalidateTag } from 'next/cache'
-
-export interface Product {
-  id?: number
-  product: string
-  price: string
-}
+import { addProductToDatabase } from '@/actions/serverActions'
+import { Product } from '@/typings'
 
 export default async function Home() {
   const res = await fetch(
@@ -18,30 +13,6 @@ export default async function Home() {
   )
 
   const products: Product[] = await res.json()
-
-  const addProductToDatabase = async (e: FormData) => {
-    'use server'
-
-    const product = e.get('product')?.toString()
-    const price = e.get('price')?.toString()
-
-    if (!product || !price) return
-
-    const newProduct: Product = {
-      product,
-      price,
-    }
-
-    await fetch('https://64ad213bb470006a5ec56616.mockapi.io/products', {
-      method: 'POST',
-      body: JSON.stringify(newProduct),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-
-    revalidateTag('products')
-  }
 
   return (
     <main className="">
