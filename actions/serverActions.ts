@@ -4,8 +4,6 @@ import { Product } from '@/typings'
 import { revalidateTag } from 'next/cache'
 
 export const addProductToDatabase = async (e: FormData) => {
-  'use server'
-
   const product = e.get('product')?.toString()
   const price = e.get('price')?.toString()
 

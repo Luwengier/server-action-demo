@@ -1,4 +1,5 @@
 import { addProductToDatabase } from '@/actions/serverActions'
+import AddProductButton from '@/components/AddProductButton'
 import { Product } from '@/typings'
 
 export default async function Home() {
@@ -17,6 +18,8 @@ export default async function Home() {
   return (
     <main className="">
       <h1 className="text-3xl font-bold text-center">Products Warehouse</h1>
+
+      <AddProductButton />
 
       <form
         action={addProductToDatabase}
